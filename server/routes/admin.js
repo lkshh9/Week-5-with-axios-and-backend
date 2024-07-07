@@ -67,6 +67,7 @@ router.post('/signup', (req, res) => {
     res.json({ courses });
   });
   
+  // route to handle specific courseId of a course
   router.get('/course/:courseId', authenticateJwt, async (req, res) => {
     const courseId = req.params.courseId;
     const course = await Course.findById(courseId);
