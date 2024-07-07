@@ -4,11 +4,19 @@ import { useParams } from "react-router-dom";
 import { Typography, TextField, Button } from "@mui/material";
 import axios from "axios";
 
+// This Course component handles fetching and displaying data for a specific course, 
+// updating the UI based on the state of the data fetch operation.
+// The Course function is a React component that displays detailed information about a specific course. 
+// It uses the useEffect hook to fetch course data from an API when the component mounts or when the courseId changes.
+
 function Course() {
     let { courseId } = useParams();
     const [course, setCourse] = useState(null);
     
     useEffect(() => {
+
+        // not used async await, just simple axios - let's try converting it to async, await
+
         axios.get("http://localhost:3000/admin/course/" + courseId, {
             method: "GET",
             headers: {
@@ -17,7 +25,27 @@ function Course() {
         }).then(res => {
             setCourse(res.data.course);
         });
-    }, []);
+
+        // We can use async inside useEffect by declaring an async function within the useEffect hook and then calling it. 
+        // This approach avoids directly passing an async function to useEffect, which is not supported.
+
+        // const fetchCourse = async () => {
+        //     try {
+        //         const token = localStorage.getItem("token");
+        //         const response = await axios.get(`http://localhost:3000/admin/course/${courseId}`, {
+        //             headers: {
+        //                 "Authorization": `Bearer ${token}`
+        //             }
+        //         });
+        //         setCourse(response.data.course);
+        //     } catch (error) {
+        //         console.error("Error fetching course:", error);
+        //     }
+        // };
+
+        // fetchCourse(); // Call the async function
+
+    }, [courseId]); // Dependency array to re-fetch data if courseId changes
 
     if (!course) {
         return <div style={{height: "100vh", justifyContent: "center", flexDirection: "column"}}>
@@ -29,7 +57,7 @@ function Course() {
         <GrayTopper title={course.title}/>
         <Grid container>
             <Grid item lg={8} md={12} sm={12}>
-                <UpdateCard course={course} setCourse={setCourse} />
+                <UpdateCard course={course} setCourse={setCourse} /> // parent component setCourse passed down as a prop to its child component
             </Grid>
             <Grid item lg={4} md={12} sm={12}>
                 <CourseCard course={course} />
@@ -51,7 +79,7 @@ function GrayTopper({title}) {
 }
 
 function UpdateCard({course, setCourse}) {
-    const [title, setTitle] = useState(course.title);
+    const [title, setTitle] = useState(course.title); // this course.title in useState enables the input box have the current value as the initial value rather than input box being empty
     const [description, setDescription] = useState(course.description);
     const [image, setImage] = useState(course.imageLink);
     const [price, setPrice] = useState(course.price);
@@ -64,7 +92,7 @@ function UpdateCard({course, setCourse}) {
                 value={title}
                 style={{marginBottom: 10}}
                 onChange={(e) => {
-                    setTitle(e.target.value)
+                    setTitle(e.target.value) // whenver someone changes the content of textfield onChange will be called and setTitle is updated with new target which will then update the state
                 }}
                 fullWidth={true}
                 label="Title"
