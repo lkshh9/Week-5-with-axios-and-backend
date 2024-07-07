@@ -1,3 +1,5 @@
+// Page that shows admin all their courses they have created
+
 import { Button, Card, Typography } from "@mui/material";
 import { useEffect, useState } from "react";
 import {useNavigate} from "react-router-dom";

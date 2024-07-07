@@ -5,7 +5,7 @@ import {useNavigate} from "react-router-dom";
 
 function Appbar() {
     const navigate = useNavigate()
-    const [userEmail, setUserEmail] = useState(null);
+    const [userEmail, setUserEmail] = useState(null); // userEmail represents whether the user is currently logged in or not 
 
     useEffect(() => {
         function callback2(data) {
