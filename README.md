@@ -31,3 +31,39 @@
 <br />
 
 This README format provides a structured overview of the key concepts and learnings, along with the complete example code for the `Course` component.
+
+
+# Project Repository Update: Default Branch Change
+
+## Overview
+This repository has been updated to change the default branch from `master` to `main` on GitHub. This change aligns with current best practices in the tech community.
+
+## Changes Made
+**Branch Renaming and Default Update:**
+- The `master` branch has been renamed to `main`.
+- `main` has been set as the new default branch on GitHub.
+
+**Local Repository Update:**
+- Local branches and workflows have been adjusted to track the new default branch (`main`).
+
+## How to Update Your Local Copy
+If you have an existing local copy of this repository, follow these steps to update it:
+
+```bash
+# Ensure you are on the master branch (if not already)
+git checkout master
+
+# Fetch the latest changes from the remote repository
+git pull origin master
+
+# Create and switch to a new main branch
+git checkout -b main
+
+# Push the new main branch to the remote repository
+git push origin main
+
+# Set up tracking for the new main branch
+git branch --set-upstream-to=origin/main main
+
+# Delete the old master branch locally (optional)
+git branch -d master
